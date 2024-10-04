@@ -15,10 +15,49 @@ namespace TransNeftEnergo.Data
             List<SubsidiaryOrganization> subsidiaryOrganizations = AddSubsidiaryOrganizations(context, organizations);
             List<ObjectOfConsumption> objectOfConsumptions = AddObjectOfConsumption(context, subsidiaryOrganizations);
             List<ElectricitySupplyPoint> electricitySupplyPoints = AddElectricitySupplyPoint(context, objectOfConsumptions);
-            
             List<CalculationDevice> calculationDevices = AddCalculationDevice(context, electricitySupplyPoints);
+            List<ElectricityMeasurementPoint> electricityMeasurementPoints = AddElectricityMeasurementPoint(context, objectOfConsumptions);
+            
+            List<AccountingPeriod> accountingPeriods = AddAccountingPeriod();
 
             context.SaveChanges();
+        }
+
+        private static List<ElectricityMeasurementPoint> AddElectricityMeasurementPoint(OrganizationDb context, List<ObjectOfConsumption> objectOfConsumptions)
+        {
+            List<ElectricityMeasurementPoint> electricityMeasurementPoints = new List<ElectricityMeasurementPoint>()
+                {
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка поставки электроэнергии 1",
+                        ObjectOfConsumption = objectOfConsumptions[0]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка поставки электроэнергии 2",
+                        ObjectOfConsumption = objectOfConsumptions[1]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка поставки электроэнергии 3",
+                        ObjectOfConsumption = objectOfConsumptions[2]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка поставки электроэнергии 4",
+                        ObjectOfConsumption = objectOfConsumptions[3]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка поставки электроэнергии 5",
+                        ObjectOfConsumption = objectOfConsumptions[4]
+                    },
+                };
+            if (!context.ElectricityMeasurementPoints.Any())
+            {
+                context.ElectricityMeasurementPoints.AddRange(electricityMeasurementPoints);
+            }
+            return electricityMeasurementPoints;
         }
 
         private static List<CalculationDevice> AddCalculationDevice(OrganizationDb context, List<ElectricitySupplyPoint> electricitySupplyPoints)
