@@ -1,0 +1,6 @@
+@TransNeftEnergo_HostAddress = http://localhost:5091
+
+GET {{TransNeftEnergo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
