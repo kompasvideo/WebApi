@@ -15,10 +15,238 @@ namespace TransNeftEnergo.Data
             List<SubsidiaryOrganization> subsidiaryOrganizations = AddSubsidiaryOrganizations(context, organizations);
             List<ObjectOfConsumption> objectOfConsumptions = AddObjectOfConsumption(context, subsidiaryOrganizations);
             List<ElectricitySupplyPoint> electricitySupplyPoints = AddElectricitySupplyPoint(context, objectOfConsumptions);
-            
             List<CalculationDevice> calculationDevices = AddCalculationDevice(context, electricitySupplyPoints);
-
+            List<ElectricityMeasurementPoint> electricityMeasurementPoints = AddElectricityMeasurementPoint(context, objectOfConsumptions);
+            List<AccountingPeriod> accountingPeriods = AddAccountingPeriod(context, calculationDevices, electricityMeasurementPoints);
+            List<ElectricEnergyMeter> electricEnergyMeters = AddElectricEnergyMeter(context, electricityMeasurementPoints);
+            List<CurrentTransformer> currentTransformers = AddCurrentTransformer(context, electricityMeasurementPoints);
+            List<VoltageTransformer> voltageTransformers = AddVoltageTransformer(context, electricityMeasurementPoints);
             context.SaveChanges();
+        }
+
+        private static List<VoltageTransformer> AddVoltageTransformer(OrganizationDb context, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
+        {
+            List<VoltageTransformer> voltageTransformers = new List<VoltageTransformer>()
+                {
+                    new VoltageTransformer
+                    {
+                        Number = 211,
+                        Type = Enums.VoltageTransformerType.Type1,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTN ="50/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new VoltageTransformer
+                    {
+                        Number = 212,
+                        Type = Enums.VoltageTransformerType.Type3,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTN ="50/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new VoltageTransformer
+                    {
+                        Number = 214,
+                        Type = Enums.VoltageTransformerType.Type1,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTN ="50/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new VoltageTransformer
+                    {
+                        Number = 215,
+                        Type = Enums.VoltageTransformerType.Type2,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTN ="50/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new VoltageTransformer
+                    {
+                        Number = 216,
+                        Type = Enums.VoltageTransformerType.Type3,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTN ="50/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                };
+            if (!context.VoltageTransformers.Any())
+            {
+                context.VoltageTransformers.AddRange(voltageTransformers);
+            }
+            return voltageTransformers;
+        }
+
+        private static List<CurrentTransformer> AddCurrentTransformer(OrganizationDb context, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
+        {
+            List<CurrentTransformer> currentTransformers = new List<CurrentTransformer>()
+                {
+                    new CurrentTransformer
+                    {
+                        Number = 111,
+                        Type = Enums.CurrentTransformerType.Type1,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTT = "100/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new CurrentTransformer
+                    {
+                        Number = 112,
+                        Type = Enums.CurrentTransformerType.Type1,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTT = "100/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[1]
+                    },
+                    new CurrentTransformer
+                    {
+                        Number = 114,
+                        Type = Enums.CurrentTransformerType.Type3,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTT = "100/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[2]
+                    },
+                    new CurrentTransformer
+                    {
+                        Number = 115,
+                        Type = Enums.CurrentTransformerType.Type2,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTT = "100/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[3]
+                    },
+                    new CurrentTransformer
+                    {
+                        Number = 116,
+                        Type = Enums.CurrentTransformerType.Type3,
+                        VerificationDate = new DateTime(2025,12,01),
+                        KTT = "100/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[4]
+                    },
+                };
+            if (!context.CurrentTransformers.Any())
+            {
+                context.CurrentTransformers.AddRange(currentTransformers);
+            }
+            return currentTransformers;
+        }
+
+        private static List<ElectricEnergyMeter> AddElectricEnergyMeter(OrganizationDb context, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
+        {
+            List<ElectricEnergyMeter> electricEnergyMeters = new List<ElectricEnergyMeter>()
+                {
+                    new ElectricEnergyMeter
+                    {
+                        Name = "Счётчик электрической энергии 1",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new ElectricEnergyMeter
+                    {
+                        Name = "Счётчик электрической энергии 2",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[1]
+                    },
+                    new ElectricEnergyMeter
+                    {
+                        Name = "Счётчик электрической энергии 3",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[2]
+                    },
+                    new ElectricEnergyMeter
+                    {
+                        Name = "Счётчик электрической энергии 4",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[3]
+                    },
+                    new ElectricEnergyMeter
+                    {
+                        Name = "Счётчик электрической энергии 5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[4]
+                    },
+                };
+            if (!context.ElectricEnergyMeters.Any())
+            {
+                context.ElectricEnergyMeters.AddRange(electricEnergyMeters);
+            }
+            return electricEnergyMeters;
+        }
+
+        private static List<AccountingPeriod> AddAccountingPeriod(OrganizationDb context, List<CalculationDevice> calculationDevices, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
+        {
+            List<AccountingPeriod> accountingPeriods = new List<AccountingPeriod>()
+                {
+                    new AccountingPeriod
+                    {
+                        StartDate = new DateTime(2024,1,1),
+                        EndDate = new DateTime(2024,2,1),
+                        CalculationDevice = calculationDevices[0],
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
+                    new AccountingPeriod
+                    {
+                        StartDate = new DateTime(2024,1,1),
+                        EndDate = new DateTime(2024,2,1),
+                        CalculationDevice = calculationDevices[1],
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[1]
+                    },
+                    new AccountingPeriod
+                    {
+                        StartDate = new DateTime(2024,1,1),
+                        EndDate = new DateTime(2024,2,1),
+                        CalculationDevice = calculationDevices[2],
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[2]
+                    },
+                    new AccountingPeriod
+                    {
+                        StartDate = new DateTime(2024,1,1),
+                        EndDate = new DateTime(2024,2,1),
+                        CalculationDevice = calculationDevices[3],
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[3]
+                    },
+                    new AccountingPeriod
+                    {
+                        StartDate = new DateTime(2024,1,1),
+                        EndDate = new DateTime(2024,2,1),
+                        CalculationDevice = calculationDevices[4],
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[4]
+                    },
+                };
+            if (!context.AccountingPeriods.Any())
+            {
+                context.AccountingPeriods.AddRange(accountingPeriods);
+            }
+            return accountingPeriods;
+        }
+
+        private static List<ElectricityMeasurementPoint> AddElectricityMeasurementPoint(OrganizationDb context, List<ObjectOfConsumption> objectOfConsumptions)
+        {
+            List<ElectricityMeasurementPoint> electricityMeasurementPoints = new List<ElectricityMeasurementPoint>()
+                {
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка измерения электроэнергии 1",
+                        ObjectOfConsumption = objectOfConsumptions[0]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка измерения электроэнергии 2",
+                        ObjectOfConsumption = objectOfConsumptions[1]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка измерения электроэнергии 3",
+                        ObjectOfConsumption = objectOfConsumptions[2]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка измерения электроэнергии 4",
+                        ObjectOfConsumption = objectOfConsumptions[3]
+                    },
+                    new ElectricityMeasurementPoint
+                    {
+                        Name = "Точка измерения электроэнергии 5",
+                        ObjectOfConsumption = objectOfConsumptions[4]
+                    },
+                };
+            if (!context.ElectricityMeasurementPoints.Any())
+            {
+                context.ElectricityMeasurementPoints.AddRange(electricityMeasurementPoints);
+            }
+            return electricityMeasurementPoints;
         }
 
         private static List<CalculationDevice> AddCalculationDevice(OrganizationDb context, List<ElectricitySupplyPoint> electricitySupplyPoints)

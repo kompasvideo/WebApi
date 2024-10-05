@@ -1,5 +1,6 @@
 using TransNeftEnergo.Data;
 using TransNeftEnergo.Logic;
+using SeedData = TransNeftEnergo.WebAPI.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 

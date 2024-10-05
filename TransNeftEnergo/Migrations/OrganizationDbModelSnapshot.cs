@@ -24,16 +24,16 @@ namespace TransNeftEnergo.WebAPI.Migrations
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.AccountingPeriod", b =>
                 {
-                    b.Property<int>("AccountingPeriodId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountingPeriodId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalculationDeviceKey")
+                    b.Property<int>("CalculationDeviceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ElectricityMeasurementPointKey")
+                    b.Property<int>("ElectricityMeasurementPointId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
@@ -42,55 +42,51 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("AccountingPeriodId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("CalculationDeviceKey");
+                    b.HasIndex("CalculationDeviceId");
 
-                    b.HasIndex("ElectricityMeasurementPointKey");
+                    b.HasIndex("ElectricityMeasurementPointId");
 
                     b.ToTable("AccountingPeriods");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.CalculationDevice", b =>
                 {
-                    b.Property<int>("ElectricitySupplyPointId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ElectricitySupplyPointId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountingPeriodKey")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ElectricitySupplyPointKey")
+                    b.Property<int>("ElectricitySupplyPointId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ElectricitySupplyPointId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AccountingPeriodKey");
-
-                    b.HasIndex("ElectricitySupplyPointKey");
+                    b.HasIndex("ElectricitySupplyPointId");
 
                     b.ToTable("CalculationDevices");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.CurrentTransformer", b =>
                 {
-                    b.Property<int>("CurrentTransformerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CurrentTransformerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ElectricityMeasurementPointKey")
+                    b.Property<int>("ElectricityMeasurementPointId")
                         .HasColumnType("int");
 
-                    b.Property<float>("KTT")
-                        .HasColumnType("real");
+                    b.Property<string>("KTT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
                         .IsRequired()
@@ -102,22 +98,23 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.Property<DateTime>("VerificationDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CurrentTransformerId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ElectricityMeasurementPointKey");
+                    b.HasIndex("ElectricityMeasurementPointId")
+                        .IsUnique();
 
                     b.ToTable("CurrentTransformers");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricEnergyMeter", b =>
                 {
-                    b.Property<int>("ElectricEnergyMeterId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ElectricEnergyMeterId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ElectricityMeasurementPointKey")
+                    b.Property<int>("ElectricityMeasurementPointId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -130,72 +127,68 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.Property<DateTime>("VerificationDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ElectricEnergyMeterId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ElectricityMeasurementPointKey");
+                    b.HasIndex("ElectricityMeasurementPointId")
+                        .IsUnique();
 
                     b.ToTable("ElectricEnergyMeters");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", b =>
                 {
-                    b.Property<int>("ElectricityMeasurementPointId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ElectricityMeasurementPointId"));
-
-                    b.Property<int>("AccountingPeriodKey")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ObjectOfConsumptionKey")
+                    b.Property<int>("ObjectOfConsumptionId")
                         .HasColumnType("int");
 
-                    b.HasKey("ElectricityMeasurementPointId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AccountingPeriodKey");
-
-                    b.HasIndex("ObjectOfConsumptionKey");
+                    b.HasIndex("ObjectOfConsumptionId");
 
                     b.ToTable("ElectricityMeasurementPoints");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricitySupplyPoint", b =>
                 {
-                    b.Property<int>("ElectricitySupplyPointId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ElectricitySupplyPointId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<float>("MaxPower")
-                        .HasColumnType("real");
+                    b.Property<double>("MaxPower")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ObjectOfConsumptionKey")
+                    b.Property<int>("ObjectOfConsumptionId")
                         .HasColumnType("int");
 
-                    b.HasKey("ElectricitySupplyPointId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ObjectOfConsumptionKey");
+                    b.HasIndex("ObjectOfConsumptionId");
 
                     b.ToTable("ElectricitySupplyPoints");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ObjectOfConsumption", b =>
                 {
-                    b.Property<int>("ObjectOfConsumptionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ObjectOfConsumptionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -205,23 +198,23 @@ namespace TransNeftEnergo.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubsidiaryOrganizationKey")
+                    b.Property<int>("SubsidiaryOrganizationId")
                         .HasColumnType("int");
 
-                    b.HasKey("ObjectOfConsumptionId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("SubsidiaryOrganizationKey");
+                    b.HasIndex("SubsidiaryOrganizationId");
 
                     b.ToTable("ObjectOfConsumptions");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.Organization", b =>
                 {
-                    b.Property<int>("OrganizationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizationId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -231,18 +224,18 @@ namespace TransNeftEnergo.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrganizationId");
+                    b.HasKey("Id");
 
                     b.ToTable("Organizations");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.SubsidiaryOrganization", b =>
                 {
-                    b.Property<int>("OrganizationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizationId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -252,29 +245,30 @@ namespace TransNeftEnergo.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrganizationKey")
+                    b.Property<int>("OrganizationId")
                         .HasColumnType("int");
 
-                    b.HasKey("OrganizationId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("OrganizationKey");
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("SubsidiaryOrganizations");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.VoltageTransformer", b =>
                 {
-                    b.Property<int>("VoltageTransformerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VoltageTransformerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ElectricityMeasurementPointKey")
+                    b.Property<int>("ElectricityMeasurementPointId")
                         .HasColumnType("int");
 
-                    b.Property<float>("KTN")
-                        .HasColumnType("real");
+                    b.Property<string>("KTN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
                         .IsRequired()
@@ -286,9 +280,10 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.Property<DateTime>("VerificationDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("VoltageTransformerId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ElectricityMeasurementPointKey");
+                    b.HasIndex("ElectricityMeasurementPointId")
+                        .IsUnique();
 
                     b.ToTable("VoltageTransformers");
                 });
@@ -296,14 +291,14 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.AccountingPeriod", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.CalculationDevice", "CalculationDevice")
-                        .WithMany()
-                        .HasForeignKey("CalculationDeviceKey")
+                        .WithMany("AccountingPeriods")
+                        .HasForeignKey("CalculationDeviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", "ElectricityMeasurementPoint")
-                        .WithMany()
-                        .HasForeignKey("ElectricityMeasurementPointKey")
+                        .WithMany("AccountingPeriods")
+                        .HasForeignKey("ElectricityMeasurementPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -314,19 +309,11 @@ namespace TransNeftEnergo.WebAPI.Migrations
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.CalculationDevice", b =>
                 {
-                    b.HasOne("TransNeftEnergo.Data.Entity.AccountingPeriod", "AccountingPeriod")
-                        .WithMany()
-                        .HasForeignKey("AccountingPeriodKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TransNeftEnergo.Data.Entity.ElectricitySupplyPoint", "ElectricitySupplyPoint")
-                        .WithMany()
-                        .HasForeignKey("ElectricitySupplyPointKey")
+                        .WithMany("CalculationDevices")
+                        .HasForeignKey("ElectricitySupplyPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AccountingPeriod");
 
                     b.Navigation("ElectricitySupplyPoint");
                 });
@@ -334,8 +321,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.CurrentTransformer", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", "ElectricityMeasurementPoint")
-                        .WithMany()
-                        .HasForeignKey("ElectricityMeasurementPointKey")
+                        .WithOne("CurrentTransformer")
+                        .HasForeignKey("TransNeftEnergo.Data.Entity.CurrentTransformer", "ElectricityMeasurementPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -345,8 +332,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricEnergyMeter", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", "ElectricityMeasurementPoint")
-                        .WithMany()
-                        .HasForeignKey("ElectricityMeasurementPointKey")
+                        .WithOne("ElectricEnergyMeter")
+                        .HasForeignKey("TransNeftEnergo.Data.Entity.ElectricEnergyMeter", "ElectricityMeasurementPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -355,19 +342,11 @@ namespace TransNeftEnergo.WebAPI.Migrations
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", b =>
                 {
-                    b.HasOne("TransNeftEnergo.Data.Entity.AccountingPeriod", "AccountingPeriod")
-                        .WithMany()
-                        .HasForeignKey("AccountingPeriodKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TransNeftEnergo.Data.Entity.ObjectOfConsumption", "ObjectOfConsumption")
-                        .WithMany()
-                        .HasForeignKey("ObjectOfConsumptionKey")
+                        .WithMany("ElectricityMeasurementPoints")
+                        .HasForeignKey("ObjectOfConsumptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AccountingPeriod");
 
                     b.Navigation("ObjectOfConsumption");
                 });
@@ -375,8 +354,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricitySupplyPoint", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.ObjectOfConsumption", "ObjectOfConsumption")
-                        .WithMany()
-                        .HasForeignKey("ObjectOfConsumptionKey")
+                        .WithMany("ElectricitySupplyPoints")
+                        .HasForeignKey("ObjectOfConsumptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -386,8 +365,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ObjectOfConsumption", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.SubsidiaryOrganization", "SubsidiaryOrganization")
-                        .WithMany()
-                        .HasForeignKey("SubsidiaryOrganizationKey")
+                        .WithMany("ObjectOfConsumptions")
+                        .HasForeignKey("SubsidiaryOrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -397,8 +376,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.SubsidiaryOrganization", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationKey")
+                        .WithMany("SubsidiaryOrganizations")
+                        .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -408,12 +387,50 @@ namespace TransNeftEnergo.WebAPI.Migrations
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.VoltageTransformer", b =>
                 {
                     b.HasOne("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", "ElectricityMeasurementPoint")
-                        .WithMany()
-                        .HasForeignKey("ElectricityMeasurementPointKey")
+                        .WithOne("VoltageTransformer")
+                        .HasForeignKey("TransNeftEnergo.Data.Entity.VoltageTransformer", "ElectricityMeasurementPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ElectricityMeasurementPoint");
+                });
+
+            modelBuilder.Entity("TransNeftEnergo.Data.Entity.CalculationDevice", b =>
+                {
+                    b.Navigation("AccountingPeriods");
+                });
+
+            modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", b =>
+                {
+                    b.Navigation("AccountingPeriods");
+
+                    b.Navigation("CurrentTransformer");
+
+                    b.Navigation("ElectricEnergyMeter");
+
+                    b.Navigation("VoltageTransformer");
+                });
+
+            modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricitySupplyPoint", b =>
+                {
+                    b.Navigation("CalculationDevices");
+                });
+
+            modelBuilder.Entity("TransNeftEnergo.Data.Entity.ObjectOfConsumption", b =>
+                {
+                    b.Navigation("ElectricityMeasurementPoints");
+
+                    b.Navigation("ElectricitySupplyPoints");
+                });
+
+            modelBuilder.Entity("TransNeftEnergo.Data.Entity.Organization", b =>
+                {
+                    b.Navigation("SubsidiaryOrganizations");
+                });
+
+            modelBuilder.Entity("TransNeftEnergo.Data.Entity.SubsidiaryOrganization", b =>
+                {
+                    b.Navigation("ObjectOfConsumptions");
                 });
 #pragma warning restore 612, 618
         }

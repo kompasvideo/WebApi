@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TransNeftEnergo.Data.Entity
+﻿namespace TransNeftEnergo.Data.Entity
 {
     // объект потребления
     public class ObjectOfConsumption
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ObjectOfConsumptionId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public int SubsidiaryOrganizationKey { get; set; }
+        public int SubsidiaryOrganizationId { get; set; }
+        public SubsidiaryOrganization? SubsidiaryOrganization { get; set; }
 
-        [ForeignKey("SubsidiaryOrganizationKey")]
-        public SubsidiaryOrganization SubsidiaryOrganization { get; set; }
+        public List<ElectricitySupplyPoint> ElectricitySupplyPoints { get; set; } = new();
+        public List<ElectricityMeasurementPoint> ElectricityMeasurementPoints { get; set; } = new();
     }
 }
