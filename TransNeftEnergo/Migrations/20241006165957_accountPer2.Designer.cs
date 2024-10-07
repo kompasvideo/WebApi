@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransNeftEnergo.Data;
 
@@ -11,9 +12,11 @@ using TransNeftEnergo.Data;
 namespace TransNeftEnergo.WebAPI.Migrations
 {
     [DbContext(typeof(OrganizationDb))]
-    partial class OrganizationDbModelSnapshot : ModelSnapshot
+    [Migration("20241006165957_accountPer2")]
+    partial class accountPer2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

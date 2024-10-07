@@ -7,8 +7,7 @@
         public string Name { get; set; }
         public int ElectricitySupplyPointId { get; set; }
         public ElectricitySupplyPoint? ElectricitySupplyPoint { get; set; }
-        //public int AccountingPeriodId { get; set; }
-        //public AccountingPeriod? AccountingPeriod { get; set; }
-        public List<AccountingPeriod?> AccountingPeriods { get; set; }
+        public List<ElectricityMeasurementPoint?> ElectricityMeasurementPoints { get; set; } = new();
+        public List<AccountingPeriod?> AccountingPeriods { get; set; } = new();
     }
 }

@@ -31,3 +31,10 @@ SeedData.EnsurePopulated(app);
 app.MapControllers();
 
 app.Run();
+
+//Microsoft.Data.SqlClient.SqlException: "Introducing FOREIGN KEY constraint
+//'FK_AccountingPeriod_ElectricityMeasurementPoints_ElectricityMeasurementPointId'
+//on table 'AccountingPeriod' may cause cycles or multiple cascade paths.
+//Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other
+//FOREIGN KEY constraints.
+//Could not create constraint or index. See previous errors."

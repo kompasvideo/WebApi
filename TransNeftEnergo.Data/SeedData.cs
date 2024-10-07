@@ -17,7 +17,8 @@ namespace TransNeftEnergo.Data
             List<ElectricitySupplyPoint> electricitySupplyPoints = AddElectricitySupplyPoint(context, objectOfConsumptions);
             List<CalculationDevice> calculationDevices = AddCalculationDevice(context, electricitySupplyPoints);
             List<ElectricityMeasurementPoint> electricityMeasurementPoints = AddElectricityMeasurementPoint(context, objectOfConsumptions);
-            List<AccountingPeriod> accountingPeriods = AddAccountingPeriod(context, calculationDevices, electricityMeasurementPoints);
+            //List<AccountingPeriod> accountingPeriods = AddAccountingPeriod(context, calculationDevices, electricityMeasurementPoints);
+            AddCalculationDeviceToElectricityMeasurementPoint(calculationDevices, electricityMeasurementPoints);
             List<ElectricEnergyMeter> electricEnergyMeters = AddElectricEnergyMeter(context, electricityMeasurementPoints);
             List<CurrentTransformer> currentTransformers = AddCurrentTransformer(context, electricityMeasurementPoints);
             List<VoltageTransformer> voltageTransformers = AddVoltageTransformer(context, electricityMeasurementPoints);
@@ -30,7 +31,7 @@ namespace TransNeftEnergo.Data
                 {
                     new VoltageTransformer
                     {
-                        Number = 211,
+                        Number = "211",
                         Type = Enums.VoltageTransformerType.Type1,
                         VerificationDate = new DateTime(2025,12,01),
                         KTN ="50/5",
@@ -38,35 +39,35 @@ namespace TransNeftEnergo.Data
                     },
                     new VoltageTransformer
                     {
-                        Number = 212,
+                        Number = "212",
                         Type = Enums.VoltageTransformerType.Type3,
                         VerificationDate = new DateTime(2025,12,01),
                         KTN ="50/5",
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[1]
                     },
                     new VoltageTransformer
                     {
-                        Number = 214,
+                        Number = "214",
                         Type = Enums.VoltageTransformerType.Type1,
                         VerificationDate = new DateTime(2025,12,01),
                         KTN ="50/5",
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[2]
                     },
                     new VoltageTransformer
                     {
-                        Number = 215,
+                        Number = "215",
                         Type = Enums.VoltageTransformerType.Type2,
                         VerificationDate = new DateTime(2025,12,01),
                         KTN ="50/5",
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[3]
                     },
                     new VoltageTransformer
                     {
-                        Number = 216,
+                        Number = "216",
                         Type = Enums.VoltageTransformerType.Type3,
                         VerificationDate = new DateTime(2025,12,01),
                         KTN ="50/5",
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[4]
                     },
                 };
             if (!context.VoltageTransformers.Any())
@@ -82,7 +83,7 @@ namespace TransNeftEnergo.Data
                 {
                     new CurrentTransformer
                     {
-                        Number = 111,
+                        Number = "111",
                         Type = Enums.CurrentTransformerType.Type1,
                         VerificationDate = new DateTime(2025,12,01),
                         KTT = "100/5",
@@ -90,7 +91,7 @@ namespace TransNeftEnergo.Data
                     },
                     new CurrentTransformer
                     {
-                        Number = 112,
+                        Number = "112",
                         Type = Enums.CurrentTransformerType.Type1,
                         VerificationDate = new DateTime(2025,12,01),
                         KTT = "100/5",
@@ -98,7 +99,7 @@ namespace TransNeftEnergo.Data
                     },
                     new CurrentTransformer
                     {
-                        Number = 114,
+                        Number = "114",
                         Type = Enums.CurrentTransformerType.Type3,
                         VerificationDate = new DateTime(2025,12,01),
                         KTT = "100/5",
@@ -106,7 +107,7 @@ namespace TransNeftEnergo.Data
                     },
                     new CurrentTransformer
                     {
-                        Number = 115,
+                        Number = "115",
                         Type = Enums.CurrentTransformerType.Type2,
                         VerificationDate = new DateTime(2025,12,01),
                         KTT = "100/5",
@@ -114,7 +115,7 @@ namespace TransNeftEnergo.Data
                     },
                     new CurrentTransformer
                     {
-                        Number = 116,
+                        Number = "116",
                         Type = Enums.CurrentTransformerType.Type3,
                         VerificationDate = new DateTime(2025,12,01),
                         KTT = "100/5",
@@ -135,26 +136,36 @@ namespace TransNeftEnergo.Data
                     new ElectricEnergyMeter
                     {
                         Name = "Счётчик электрической энергии 1",
+                        Type = Enums.MeterType.Type1,
+                        VerificationDate = new DateOnly(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[0]
                     },
                     new ElectricEnergyMeter
                     {
                         Name = "Счётчик электрической энергии 2",
+                        Type = Enums.MeterType.Type2,
+                        VerificationDate = new DateOnly(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[1]
                     },
                     new ElectricEnergyMeter
                     {
                         Name = "Счётчик электрической энергии 3",
+                        Type = Enums.MeterType.Type3,
+                        VerificationDate = new DateOnly(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[2]
                     },
                     new ElectricEnergyMeter
                     {
                         Name = "Счётчик электрической энергии 4",
+                        Type = Enums.MeterType.Type1,
+                        VerificationDate = new DateOnly(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[3]
                     },
                     new ElectricEnergyMeter
                     {
                         Name = "Счётчик электрической энергии 5",
+                        Type = Enums.MeterType.Type2,
+                        VerificationDate = new DateOnly(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[4]
                     },
                 };
@@ -165,52 +176,93 @@ namespace TransNeftEnergo.Data
             return electricEnergyMeters;
         }
 
-        private static List<AccountingPeriod> AddAccountingPeriod(OrganizationDb context, List<CalculationDevice> calculationDevices, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
+        private static void AddCalculationDeviceToElectricityMeasurementPoint(List<CalculationDevice> calculationDevices, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
         {
-            List<AccountingPeriod> accountingPeriods = new List<AccountingPeriod>()
-                {
-                    new AccountingPeriod
-                    {
-                        StartDate = new DateTime(2024,1,1),
-                        EndDate = new DateTime(2024,2,1),
-                        CalculationDevice = calculationDevices[0],
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
-                    },
-                    new AccountingPeriod
-                    {
-                        StartDate = new DateTime(2024,1,1),
-                        EndDate = new DateTime(2024,2,1),
-                        CalculationDevice = calculationDevices[1],
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[1]
-                    },
-                    new AccountingPeriod
-                    {
-                        StartDate = new DateTime(2024,1,1),
-                        EndDate = new DateTime(2024,2,1),
-                        CalculationDevice = calculationDevices[2],
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[2]
-                    },
-                    new AccountingPeriod
-                    {
-                        StartDate = new DateTime(2024,1,1),
-                        EndDate = new DateTime(2024,2,1),
-                        CalculationDevice = calculationDevices[3],
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[3]
-                    },
-                    new AccountingPeriod
-                    {
-                        StartDate = new DateTime(2024,1,1),
-                        EndDate = new DateTime(2024,2,1),
-                        CalculationDevice = calculationDevices[4],
-                        ElectricityMeasurementPoint = electricityMeasurementPoints[4]
-                    },
-                };
-            if (!context.AccountingPeriods.Any())
+            calculationDevices[0].AccountingPeriods.Add( new AccountingPeriod { 
+                    ElectricityMeasurementPoint = electricityMeasurementPoints[0], 
+                    StartDate = new DateTime(2024,1,1),
+                    EndDate = new DateTime(2024,2,1),
+            });
+            calculationDevices[0].ElectricityMeasurementPoints.Add(electricityMeasurementPoints[0]);
+
+            calculationDevices[1].AccountingPeriods.Add(new AccountingPeriod
             {
-                context.AccountingPeriods.AddRange(accountingPeriods);
-            }
-            return accountingPeriods;
+                ElectricityMeasurementPoint = electricityMeasurementPoints[1],
+                StartDate = new DateTime(2024, 1, 1),
+                EndDate = new DateTime(2024, 2, 1),
+            });
+            calculationDevices[1].ElectricityMeasurementPoints.Add(electricityMeasurementPoints[1]);
+
+            calculationDevices[2].AccountingPeriods.Add(new AccountingPeriod
+            {
+                ElectricityMeasurementPoint = electricityMeasurementPoints[2],
+                StartDate = new DateTime(2024, 1, 1),
+                EndDate = new DateTime(2024, 2, 1),
+            });
+            calculationDevices[2].ElectricityMeasurementPoints.Add(electricityMeasurementPoints[2]);
+
+            calculationDevices[3].AccountingPeriods.Add(new AccountingPeriod
+            {
+                ElectricityMeasurementPoint = electricityMeasurementPoints[3],
+                StartDate = new DateTime(2024, 1, 1),
+                EndDate = new DateTime(2024, 2, 1),
+            });
+            calculationDevices[3].ElectricityMeasurementPoints.Add(electricityMeasurementPoints[3]);
+
+            calculationDevices[4].AccountingPeriods.Add(new AccountingPeriod
+            {
+                ElectricityMeasurementPoint = electricityMeasurementPoints[4],
+                StartDate = new DateTime(2024, 1, 1),
+                EndDate = new DateTime(2024, 2, 1),
+            });
+            calculationDevices[4].ElectricityMeasurementPoints.Add(electricityMeasurementPoints[4]);
         }
+        //private static List<AccountingPeriod> AddAccountingPeriod(OrganizationDb context, List<CalculationDevice> calculationDevices, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
+        //{
+        //List<AccountingPeriod> accountingPeriods = new List<AccountingPeriod>()
+        //    {
+        //        new AccountingPeriod
+        //        {
+        //            StartDate = new DateTime(2024,1,1),
+        //            EndDate = new DateTime(2024,2,1),
+        //            CalculationDevice = calculationDevices[0],
+        //            ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+        //        },
+        //        new AccountingPeriod
+        //        {
+        //            StartDate = new DateTime(2024,1,1),
+        //            EndDate = new DateTime(2024,2,1),
+        //            CalculationDevice = calculationDevices[1],
+        //            ElectricityMeasurementPoint = electricityMeasurementPoints[1]
+        //        },
+        //        new AccountingPeriod
+        //        {
+        //            StartDate = new DateTime(2024,1,1),
+        //            EndDate = new DateTime(2024,2,1),
+        //            CalculationDevice = calculationDevices[2],
+        //            ElectricityMeasurementPoint = electricityMeasurementPoints[2]
+        //        },
+        //        new AccountingPeriod
+        //        {
+        //            StartDate = new DateTime(2024,1,1),
+        //            EndDate = new DateTime(2024,2,1),
+        //            CalculationDevice = calculationDevices[3],
+        //            ElectricityMeasurementPoint = electricityMeasurementPoints[3]
+        //        },
+        //        new AccountingPeriod
+        //        {
+        //            StartDate = new DateTime(2024,1,1),
+        //            EndDate = new DateTime(2024,2,1),
+        //            CalculationDevice = calculationDevices[4],
+        //            ElectricityMeasurementPoint = electricityMeasurementPoints[4]
+        //        },
+        //    };
+        //if (!context.AccountingPeriods.Any())
+        //{
+        //    context.AccountingPeriods.AddRange(accountingPeriods);
+        //}
+        //return accountingPeriods;
+        //}
 
         private static List<ElectricityMeasurementPoint> AddElectricityMeasurementPoint(OrganizationDb context, List<ObjectOfConsumption> objectOfConsumptions)
         {
@@ -354,7 +406,7 @@ namespace TransNeftEnergo.Data
                     {
                         Name = "ПС 110/10 Зима",
                         Address = "Адрес_4",
-                        SubsidiaryOrganization = subsidiaryOrganizations[4]
+                        SubsidiaryOrganization = subsidiaryOrganizations[1]
                     },                    
                     new ObjectOfConsumption
                     {
@@ -412,15 +464,18 @@ namespace TransNeftEnergo.Data
                 {
                     new Organization
                         {
-                            Name = "Организация 1"
+                            Name = "Организация 1",
+                            Address = "Адрес_1",
                         },
                         new Organization
                         {
-                            Name = "Организация 2"
+                            Name = "Организация 2",
+                            Address = "Адрес_2",
                         },
                         new Organization
                         {
-                            Name = "Организация 3"
+                            Name = "Организация 3",
+                            Address = "Адрес_3",
                         }
                 };
             if (!context.Organizations.Any())

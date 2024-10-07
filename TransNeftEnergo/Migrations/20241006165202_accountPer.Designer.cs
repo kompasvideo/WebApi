@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransNeftEnergo.Data;
 
@@ -11,9 +12,11 @@ using TransNeftEnergo.Data;
 namespace TransNeftEnergo.WebAPI.Migrations
 {
     [DbContext(typeof(OrganizationDb))]
-    partial class OrganizationDbModelSnapshot : ModelSnapshot
+    [Migration("20241006165202_accountPer")]
+    partial class accountPer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,13 +292,13 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.HasOne("TransNeftEnergo.Data.Entity.CalculationDevice", "CalculationDevice")
                         .WithMany("AccountingPeriods")
                         .HasForeignKey("CalculationDeviceId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", "ElectricityMeasurementPoint")
                         .WithMany("AccountingPeriods")
                         .HasForeignKey("ElectricityMeasurementPointId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CalculationDevice");

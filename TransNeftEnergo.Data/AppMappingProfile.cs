@@ -12,6 +12,8 @@ namespace TransNeftEnergo.Data
             CreateMap<Organization, OrganizationDto>().ReverseMap();
             CreateMap<SubsidiaryOrganization, SubsidiaryOrganizationDto>();
             CreateMap<SubsidiaryOrganization, SubsidiaryOrganizationDto>().ReverseMap();
+            CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointDto>();
+            CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointDto>().ReverseMap();
         }
     }
 }

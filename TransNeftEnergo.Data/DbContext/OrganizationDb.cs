@@ -21,7 +21,28 @@ namespace TransNeftEnergo.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           // modelBuilder.Entity<AccountingPeriod>().HasKey(p => new { p.CalculationDeviceKey, p.ElectricityMeasurementPointKey });
+            modelBuilder
+                .Entity<CalculationDevice>()
+                .HasMany(c => c.ElectricityMeasurementPoints)
+                .WithMany(e => e.CalculationDevices)
+                .UsingEntity<AccountingPeriod>(
+                    a => a
+                    .HasOne(b => b.ElectricityMeasurementPoint)
+                    .WithMany(d => d.AccountingPeriods)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasForeignKey(b => b.ElectricityMeasurementPointId),
+                    a => a
+                    .HasOne(b => b.CalculationDevice)
+                    .WithMany(f => f.AccountingPeriods)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasForeignKey(b => b.CalculationDeviceId),
+                    a =>
+                    {
+                        a.Property(b => b.StartDate).HasDefaultValue(new DateTime());
+                        a.Property(b => b.EndDate).HasDefaultValue(new DateTime());
+                        a.HasKey(t => new { t.CalculationDeviceId, t.ElectricityMeasurementPointId });
+                        a.ToTable("AccountingPeriod");
+                    });
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -6,7 +6,7 @@ namespace TransNeftEnergo.Data.Entity
     public class CurrentTransformer
     {
         public int Id { get; set; }
-        public decimal Number { get; set; }
+        public string Number { get; set; }
         public CurrentTransformerType Type { get; set; }
         public DateTime VerificationDate { get; set; }
         public string KTT { get; set; }

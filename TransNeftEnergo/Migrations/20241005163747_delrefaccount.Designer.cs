@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransNeftEnergo.Data;
 
@@ -11,9 +12,11 @@ using TransNeftEnergo.Data;
 namespace TransNeftEnergo.WebAPI.Migrations
 {
     [DbContext(typeof(OrganizationDb))]
-    partial class OrganizationDbModelSnapshot : ModelSnapshot
+    [Migration("20241005163747_delrefaccount")]
+    partial class delrefaccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,27 +27,21 @@ namespace TransNeftEnergo.WebAPI.Migrations
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.AccountingPeriod", b =>
                 {
-                    b.Property<int>("CalculationDeviceId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ElectricityMeasurementPointId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("EndDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("CalculationDeviceId", "ElectricityMeasurementPointId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ElectricityMeasurementPointId");
-
-                    b.ToTable("AccountingPeriod", (string)null);
+                    b.ToTable("AccountingPeriods");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.CalculationDevice", b =>
@@ -84,9 +81,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Number")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -120,8 +116,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("VerificationDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("VerificationDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -266,9 +262,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Number")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -282,25 +277,6 @@ namespace TransNeftEnergo.WebAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("VoltageTransformers");
-                });
-
-            modelBuilder.Entity("TransNeftEnergo.Data.Entity.AccountingPeriod", b =>
-                {
-                    b.HasOne("TransNeftEnergo.Data.Entity.CalculationDevice", "CalculationDevice")
-                        .WithMany("AccountingPeriods")
-                        .HasForeignKey("CalculationDeviceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", "ElectricityMeasurementPoint")
-                        .WithMany("AccountingPeriods")
-                        .HasForeignKey("ElectricityMeasurementPointId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CalculationDevice");
-
-                    b.Navigation("ElectricityMeasurementPoint");
                 });
 
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.CalculationDevice", b =>
@@ -391,15 +367,8 @@ namespace TransNeftEnergo.WebAPI.Migrations
                     b.Navigation("ElectricityMeasurementPoint");
                 });
 
-            modelBuilder.Entity("TransNeftEnergo.Data.Entity.CalculationDevice", b =>
-                {
-                    b.Navigation("AccountingPeriods");
-                });
-
             modelBuilder.Entity("TransNeftEnergo.Data.Entity.ElectricityMeasurementPoint", b =>
                 {
-                    b.Navigation("AccountingPeriods");
-
                     b.Navigation("CurrentTransformer");
 
                     b.Navigation("ElectricEnergyMeter");

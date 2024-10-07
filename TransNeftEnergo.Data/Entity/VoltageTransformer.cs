@@ -6,7 +6,7 @@ namespace TransNeftEnergo.Data.Entity
     public class VoltageTransformer
     {
         public int Id { get; set; }
-        public decimal Number { get; set; }
+        public string Number { get; set; }
         public VoltageTransformerType Type { get; set; }
         public DateTime VerificationDate { get; set; }
         public string KTN { get; set; }

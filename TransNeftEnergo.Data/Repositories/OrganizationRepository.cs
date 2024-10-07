@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TransNeftEnergo.Application.Interfaces;
+using TransNeftEnergo.Application.Interfaces.Repositories;
 using TransNeftEnergo.Core.Entity;
 
 namespace TransNeftEnergo.Data.Repositories
@@ -9,7 +9,7 @@ namespace TransNeftEnergo.Data.Repositories
         IMapper _mapper)
         : IOrganizationRepository
     {
-        public IQueryable<OrganizationDto> Organizations()
+        public async Task<IQueryable<OrganizationDto>> GetAll()
         {
             return _organizationDb.Organizations.Select(t => _mapper.Map<OrganizationDto>(t));
         }
