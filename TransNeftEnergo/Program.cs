@@ -2,6 +2,46 @@ using TransNeftEnergo.Data;
 using TransNeftEnergo.Logic;
 using SeedData = TransNeftEnergo.WebAPI.SeedData;
 
+DateIn dateIn1 = new DateIn {
+    Date = new DateTime(2018,2,1)
+};
+DateIn dateIn2 = new()
+{
+    Date = new DateTime(2018, 2, 1)
+};
+DateIn dateIn3 = new()
+{
+    Date = new DateTime(2018, 3, 1)
+};
+DateIn dateIn4 = new()
+{
+    Date = new DateTime(2017, 2, 1)
+};
+Rasch rasch1 = new()
+{
+    Name ="one",
+    DateIns = [dateIn1, dateIn2]
+};
+Rasch rasch2 = new()
+{
+    Name = "two",
+    DateIns = [dateIn3, dateIn4]
+};
+List<Rasch> rasches = [rasch1, rasch2];
+//HashSet<Rasch> rasches2 = new();
+//foreach(Rasch rasch in rasches)
+//{
+//    foreach(var item in rasch.DateIns)
+//    {
+//        if (item.Date.Year == 2018)
+//            rasches2.Add(rasch);
+//    }
+//}
+var rasches2 = rasches.Where(rasch => 
+    rasch.DateIns.Any(item => item.Date.Year == 2018)).ToList();
+Console.WriteLine(rasches2.Count);
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -32,9 +72,13 @@ app.MapControllers();
 
 app.Run();
 
-//Microsoft.Data.SqlClient.SqlException: "Introducing FOREIGN KEY constraint
-//'FK_AccountingPeriod_ElectricityMeasurementPoints_ElectricityMeasurementPointId'
-//on table 'AccountingPeriod' may cause cycles or multiple cascade paths.
-//Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other
-//FOREIGN KEY constraints.
-//Could not create constraint or index. See previous errors."
+
+class DateIn
+{
+    public DateTime Date { get; set; }
+}
+class Rasch
+{
+    public string Name { get; set; }
+    public List<DateIn> DateIns { get; set; }
+}

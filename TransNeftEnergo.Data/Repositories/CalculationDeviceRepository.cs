@@ -1,4 +1,5 @@
-﻿using TransNeftEnergo.Application.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using TransNeftEnergo.Application.Interfaces.Repositories;
 using TransNeftEnergo.Core.Entity;
 
 namespace TransNeftEnergo.Data.Repositories
@@ -7,9 +8,12 @@ namespace TransNeftEnergo.Data.Repositories
         OrganizationDb _Db)
         : ICalculationDeviceRepository
     {
+        // 2.	Выбрать все расчетные приборы учета в 2018 году.
         public async Task<IEnumerable<CalculationDeviceDto>> GetAllForYear(int year)
         {
-            //_Db.CalculationDevices.Where(t => t.AccountingPeriods.)
+            var result = await _Db.CalculationDevices.Where(t => t.AccountingPeriods.Any(
+                i => i.StartDate.Year <= year && i.EndDate.Year >= year)).ToListAsync();
+            Map.ToCalculationDeviceDto 
             throw new NotImplementedException();
         }
     }

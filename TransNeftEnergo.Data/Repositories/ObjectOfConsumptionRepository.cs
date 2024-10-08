@@ -11,7 +11,7 @@ namespace TransNeftEnergo.Data.Repositories
     {
         public async Task<IEnumerable<ElectricEnergyMeterDto>> GetAllMetersToEndVerificationDate(ObjectOfConsumptionDto objectOfConsumptionDto)
         {
-            _Db.ObjectOfConsumptions.Where(m => m.);
+            //_Db.ObjectOfConsumptions.Where(m => m.);
             throw new NotImplementedException();
         }
 
