@@ -8,7 +8,6 @@ namespace TransNeftEnergo.Logic
     {
         public static IServiceCollection AddLogic(this IServiceCollection services)
         {
-            services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IElectricityMeasurementPointService, ElectricityMeasurementPointService>();
             services.AddTransient<ICalculationDeviceService, CalculationDeviceService>();
             services.AddTransient<IObjectOfConsumptionService, ObjectOfConsumptionService>();

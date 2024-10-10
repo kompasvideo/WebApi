@@ -17,7 +17,6 @@ namespace TransNeftEnergo.Data
             services.AddTransient<OrganizationDb>();
             services.AddAutoMapper(typeof(AppMappingProfile));
 
-            services.AddTransient<IOrganizationRepository, OrganizationRepository>();
             services.AddTransient<IElectricityMeasurementPointRepository, ElectricityMeasurementPointRepository>();
             services.AddTransient<ICalculationDeviceRepository, CalculationDeviceRepository>();
             services.AddTransient<IObjectOfConsumptionRepository, ObjectOfConsumptionRepository>();

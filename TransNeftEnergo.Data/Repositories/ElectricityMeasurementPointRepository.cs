@@ -11,6 +11,8 @@ namespace TransNeftEnergo.Data.Repositories
         IMapper mapper)
         : IElectricityMeasurementPointRepository
     {
+        // 1.	Добавить новую точку измерения с указанием счетчика, 
+        // трансформатора тока и трансформатора напряжения.
         public async Task<ResponseStatus> Add(ElectricityMeasurementPointDto electricityMeasurementPointDto)
         {
             ElectricityMeasurementPoint electricityMeasurementPoint = mapper.Map<ElectricityMeasurementPoint>(electricityMeasurementPointDto);
