@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TransNeftEnergo.Application.Interfaces.Repositories;
 using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Data.Entity;
 
 namespace TransNeftEnergo.Data.Repositories
 {
@@ -13,25 +15,40 @@ namespace TransNeftEnergo.Data.Repositories
         // с закончившимся сроком поверке.
         public async Task<IEnumerable<ElectricEnergyMeterDto>> GetAllMetersToEndVerificationDate(ObjectOfConsumptionDto objectOfConsumptionDto)
         {
-            var result = await _Db.ObjectOfConsumptions.Where(t => t.AccountingPeriods.Any(
-                i => i.StartDate.Year <= year && i.EndDate.Year >= year)).ToListAsync();
-            return mapper.Map<IEnumerable<CalculationDeviceDto>>(result);
-
-            throw new NotImplementedException();
+            var oOfC = mapper.Map<ObjectOfConsumption>(objectOfConsumptionDto);
+            var oOfCDb = await _Db.ObjectOfConsumptions.FirstOrDefaultAsync(i => i.Name == oOfC.Name);
+            var result =  oOfCDb.ElectricityMeasurementPoints
+                        .Select(empd => empd.ElectricEnergyMeter)
+                        .Where(meter => meter != null 
+                            && meter.VerificationDate < DateOnly.FromDateTime(DateTime.Now))
+                        .ToList();
+            return mapper.Map<IEnumerable<ElectricEnergyMeterDto>>(result);
         }
 
         // 4. По указанному объекту потребления выбрать все 
         // трансформаторы напряжения с закончившимся сроком поверке.
         public async Task<IEnumerable<VoltageTransformerDto>> GetAllVoltageTransformersToEndVerificationDate(ObjectOfConsumptionDto objectOfConsumptionDto)
         {
-            throw new NotImplementedException();
+            var oOfC = mapper.Map<ObjectOfConsumption>(objectOfConsumptionDto);
+            var oOfCDb = await _Db.ObjectOfConsumptions.FirstOrDefaultAsync(i => i.Name == oOfC.Name);
+            var result = oOfCDb.ElectricityMeasurementPoints
+                        .Select(v => v.VoltageTransformer)
+                        .Where(meter => meter != null && meter.VerificationDate < DateTime.Now)
+                        .ToList();
+            return mapper.Map<IEnumerable<VoltageTransformerDto>>(result);
         }
 
         // 5. По указанному объекту потребления выбрать все 
         // трансформаторы тока с закончившимся сроком поверке.
         public async Task<IEnumerable<CurrentTransformerDto>> GetAllCurrentTransformersToEndVerificationDate(ObjectOfConsumptionDto objectOfConsumptionDto)
         {
-            throw new NotImplementedException();
+            var oOfC = mapper.Map<ObjectOfConsumption>(objectOfConsumptionDto);
+            var oOfCDb = await _Db.ObjectOfConsumptions.FirstOrDefaultAsync(i => i.Name == oOfC.Name);
+            var result = oOfCDb.ElectricityMeasurementPoints
+                        .Select(v => v.CurrentTransformer)
+                        .Where(meter => meter != null && meter.VerificationDate < DateTime.Now)
+                        .ToList();
+            return mapper.Map<IEnumerable<CurrentTransformerDto>>(result);
         }
     }
 }

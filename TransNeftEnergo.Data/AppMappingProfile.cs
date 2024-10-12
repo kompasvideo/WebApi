@@ -14,6 +14,12 @@ namespace TransNeftEnergo.Data
             CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointDto>().ReverseMap();
             CreateMap<IEnumerable<CalculationDevice>, IEnumerable<CalculationDeviceDto>>();
             CreateMap<IEnumerable<CalculationDevice>, IEnumerable<CalculationDeviceDto>>().ReverseMap();
+            CreateMap<IEnumerable<ElectricEnergyMeter>, IEnumerable<ElectricEnergyMeterDto>>();
+            CreateMap<IEnumerable<ElectricEnergyMeter>, IEnumerable<ElectricEnergyMeterDto>>().ReverseMap();
+            CreateMap<IEnumerable<VoltageTransformer>, IEnumerable<VoltageTransformerDto>>();
+            CreateMap<IEnumerable<VoltageTransformer>, IEnumerable<VoltageTransformerDto>>().ReverseMap();
+            CreateMap<IEnumerable<CurrentTransformer>, IEnumerable<CurrentTransformerDto>>();
+            CreateMap<IEnumerable<CurrentTransformer>, IEnumerable<CurrentTransformerDto>>().ReverseMap();
         }
     }
 }
