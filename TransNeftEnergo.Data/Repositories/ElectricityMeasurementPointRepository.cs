@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
 using TransNeftEnergo.Application.Interfaces.Repositories;
-using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Core.Requests;
 using TransNeftEnergo.Core.Responses;
 using TransNeftEnergo.Data.Entity;
 
 namespace TransNeftEnergo.Data.Repositories
 {
-    public class ElectricityMeasurementPointRepository (
+    public class ElectricityMeasurementPointRepository(
         OrganizationDb _Db,
         IMapper mapper)
         : IElectricityMeasurementPointRepository
     {
         // 1.	Добавить новую точку измерения с указанием счетчика, 
         // трансформатора тока и трансформатора напряжения.
-        public async Task<ResponseStatus> Add(ElectricityMeasurementPointDto electricityMeasurementPointDto)
+        public async Task<ResponseStatus> Add(ElectricityMeasurementPointReq electricityMeasurementPointReq)
         {
-            ElectricityMeasurementPoint electricityMeasurementPoint = mapper.Map<ElectricityMeasurementPoint>(electricityMeasurementPointDto);
+            ElectricityMeasurementPoint electricityMeasurementPoint = mapper.Map<ElectricityMeasurementPoint>(electricityMeasurementPointReq);
             using (var transaction = _Db.Database.BeginTransaction())
             {
                 await _Db.CurrentTransformers.AddAsync(electricityMeasurementPoint?.CurrentTransformer);

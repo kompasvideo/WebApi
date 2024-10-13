@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Core.Requests;
 using TransNeftEnergo.Data.Entity;
 
 namespace TransNeftEnergo.Data
@@ -20,6 +21,15 @@ namespace TransNeftEnergo.Data
             CreateMap<IEnumerable<VoltageTransformer>, IEnumerable<VoltageTransformerDto>>().ReverseMap();
             CreateMap<IEnumerable<CurrentTransformer>, IEnumerable<CurrentTransformerDto>>();
             CreateMap<IEnumerable<CurrentTransformer>, IEnumerable<CurrentTransformerDto>>().ReverseMap();
+
+            CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointReq>();
+            CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointReq>().ReverseMap();
+            CreateMap<ElectricEnergyMeter, ElectricEnergyMeterReq>();
+            CreateMap<ElectricEnergyMeter, ElectricEnergyMeterReq>().ReverseMap();
+            CreateMap<VoltageTransformer, VoltageTransformerReq>();
+            CreateMap<VoltageTransformer, VoltageTransformerReq>().ReverseMap();
+            CreateMap<CurrentTransformer, CurrentTransformerReq>();
+            CreateMap<CurrentTransformer, CurrentTransformerReq>().ReverseMap();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TransNeftEnergo.Application.Interfaces.Services;
 using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Core.Requests;
 
 namespace TransNeftEnergo.WebAPI.Controllers
 {
@@ -13,12 +14,12 @@ namespace TransNeftEnergo.WebAPI.Controllers
         /// 1.	Добавить новую точку измерения с указанием счетчика, 
         /// трансформатора тока и трансформатора напряжения.
         /// </summary>
-        /// <param name="electricityMeasurementPointDto"></param>
+        /// <param name="electricityMeasurementPointReq"></param>
         /// <returns></returns>
         [HttpPost("/api/v1/ElectricityMeasurementPoint")]
-        public async Task<ActionResult> Add([FromBody] ElectricityMeasurementPointDto electricityMeasurementPointDto)
+        public async Task<ActionResult> Add([FromBody] ElectricityMeasurementPointReq electricityMeasurementPointReq)
         {
-            var result = await electricityMeasurementPointService.Add(electricityMeasurementPointDto);
+            var result = await electricityMeasurementPointService.Add(electricityMeasurementPointReq);
             return Ok(result);
         }
     }

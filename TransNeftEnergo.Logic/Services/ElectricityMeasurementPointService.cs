@@ -1,6 +1,6 @@
 ﻿using TransNeftEnergo.Application.Interfaces.Repositories;
 using TransNeftEnergo.Application.Interfaces.Services;
-using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Core.Requests;
 using TransNeftEnergo.Core.Responses;
 
 namespace TransNeftEnergo.Logic.Services
@@ -9,9 +9,9 @@ namespace TransNeftEnergo.Logic.Services
         IElectricityMeasurementPointRepository electricityMeasurementPointRepository)
         : IElectricityMeasurementPointService
     {
-        public async Task<ResponseStatus> Add(ElectricityMeasurementPointDto electricityMeasurementPointDto)
+        public async Task<ResponseStatus> Add(ElectricityMeasurementPointReq electricityMeasurementPointReq)
         {
-            return await electricityMeasurementPointRepository.Add(electricityMeasurementPointDto);
+            return await electricityMeasurementPointRepository.Add(electricityMeasurementPointReq);
         }
     }
 }

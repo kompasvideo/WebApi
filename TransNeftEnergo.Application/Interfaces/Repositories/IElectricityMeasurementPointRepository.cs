@@ -1,10 +1,10 @@
-﻿using TransNeftEnergo.Core.Entity;
+﻿using TransNeftEnergo.Core.Requests;
 using TransNeftEnergo.Core.Responses;
 
 namespace TransNeftEnergo.Application.Interfaces.Repositories
 {
     public interface IElectricityMeasurementPointRepository
     {
-        public Task<ResponseStatus> Add(ElectricityMeasurementPointDto electricityMeasurementPointDto);
+        public Task<ResponseStatus> Add(ElectricityMeasurementPointReq electricityMeasurementPointReq);
     }
 }
