@@ -16,8 +16,7 @@ namespace TransNeftEnergo.Data.Repositories
         // с закончившимся сроком поверке.
         public async Task<IEnumerable<ElectricEnergyMeterDto>> GetAllMetersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
         {
-            var oOfC = mapper.Map<ObjectOfConsumption>(objectOfConsumptionReq);
-            var oOfCDb = await _Db.ObjectOfConsumptions.FirstOrDefaultAsync(i => i.Name == oOfC.Name);
+            var oOfCDb = await _Db.ObjectOfConsumptions.FirstOrDefaultAsync(i => i.Name == objectOfConsumptionReq.Name);
             var result =  oOfCDb.ElectricityMeasurementPoints
                         .Select(empd => empd.ElectricEnergyMeter)
                         .Where(meter => meter != null 

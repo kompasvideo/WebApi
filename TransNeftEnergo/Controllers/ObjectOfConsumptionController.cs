@@ -16,7 +16,7 @@ namespace TransNeftEnergo.WebAPI.Controllers
         /// </summary>
         /// <param name="electricityMeasurementPointDto"></param>
         /// <returns></returns>
-        [HttpGet("/api/v1/ObjectOfConsumption/AllMetersToEndVerificationDate")]
+        [HttpPost("/api/v1/ObjectOfConsumption/AllMetersToEndVerificationDate")]    // ПС 110/10 Весна
         public async Task<ActionResult> GetAllMetersToEndVerificationDate([FromBody] ObjectOfConsumptionReq objectOfConsumptionReq)
         {
             var result = await objectOfConsumptionService.GetAllMetersToEndVerificationDate(objectOfConsumptionReq);
@@ -29,7 +29,7 @@ namespace TransNeftEnergo.WebAPI.Controllers
         /// </summary>
         /// <param name="objectOfConsumptionReq"></param>
         /// <returns></returns>
-        [HttpGet("/api/v1/ObjectOfConsumption/AllVoltageTransformersToEndVerificationDate")]
+        [HttpPost("/api/v1/ObjectOfConsumption/AllVoltageTransformersToEndVerificationDate")]    // ПС 110/10 Весна
         public async Task<ActionResult> GetAllVoltageTransformersToEndVerificationDate([FromBody] ObjectOfConsumptionReq objectOfConsumptionReq)
         {
             var result = await objectOfConsumptionService.GetAllVoltageTransformersToEndVerificationDate(objectOfConsumptionReq);
@@ -42,7 +42,7 @@ namespace TransNeftEnergo.WebAPI.Controllers
         /// </summary>
         /// <param name="objectOfConsumptionReq"></param>
         /// <returns></returns>
-        [HttpGet("/api/v1/ObjectOfConsumption/AllCurrentTransformersToEndVerificationDate")]
+        [HttpPost("/api/v1/ObjectOfConsumption/AllCurrentTransformersToEndVerificationDate")]    // ПС 110/10 Весна
         public async Task<ActionResult> GetAllCurrentTransformersToEndVerificationDate([FromBody] ObjectOfConsumptionReq objectOfConsumptionReq)
         {
             var result = await objectOfConsumptionService.GetAllCurrentTransformersToEndVerificationDate(objectOfConsumptionReq);
