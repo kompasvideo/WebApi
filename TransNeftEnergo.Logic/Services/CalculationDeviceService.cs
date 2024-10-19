@@ -9,8 +9,6 @@ namespace TransNeftEnergo.Logic.Services
         : ICalculationDeviceService
     {
         public async Task<IEnumerable<CalculationDeviceResp>> GetAllForYear(int year)
-        {
-            return await calculationDeviceRepository.GetAllForYear(year);
-        }
+            => await calculationDeviceRepository.GetAllForYear(year);        
     }
 }

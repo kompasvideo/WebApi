@@ -7,14 +7,16 @@ using TransNeftEnergo.Data.Entity;
 namespace TransNeftEnergo.Data.Repositories
 {
     public class CalculationDeviceRepository(
-        OrganizationDb _Db,
+        OrganizationDb db,
         IMapper mapper)
         : ICalculationDeviceRepository
     {
         // 2.	Выбрать все расчетные приборы учета в 2018 году.
         public async Task<IEnumerable<CalculationDeviceResp>> GetAllForYear(int year)
-        => mapper.Map<CalculationDevice[], IEnumerable<CalculationDeviceResp>>(await _Db.CalculationDevices.Where(
-            t => t.AccountingPeriods.Any(
-            i => i.StartDate.Value.Year <= year && i.EndDate.Value.Year >= year)).ToArrayAsync());
+        => mapper.Map<CalculationDevice[], IEnumerable<CalculationDeviceResp>>(
+            await db.CalculationDevices
+            .Where(t => t.AccountingPeriods
+            .Any(i => i.StartDate.Value.Year <= year && i.EndDate.Value.Year >= year))
+            .ToArrayAsync());
     }
 }

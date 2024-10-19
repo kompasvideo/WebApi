@@ -10,8 +10,6 @@ namespace TransNeftEnergo.Logic.Services
         : IElectricityMeasurementPointService
     {
         public async Task<ResponseStatus> Add(ElectricityMeasurementPointReq electricityMeasurementPointReq)
-        {
-            return await electricityMeasurementPointRepository.Add(electricityMeasurementPointReq);
-        }
+            => await electricityMeasurementPointRepository.Add(electricityMeasurementPointReq);        
     }
 }

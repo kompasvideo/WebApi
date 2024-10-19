@@ -7,7 +7,7 @@ using TransNeftEnergo.Data.Entity;
 namespace TransNeftEnergo.Data.Repositories
 {
     public class ElectricityMeasurementPointRepository(
-        OrganizationDb _Db,
+        OrganizationDb db,
         IMapper mapper)
         : IElectricityMeasurementPointRepository
     {
@@ -16,14 +16,14 @@ namespace TransNeftEnergo.Data.Repositories
         public async Task<ResponseStatus> Add(ElectricityMeasurementPointReq electricityMeasurementPointReq)
         {
             ElectricityMeasurementPoint electricityMeasurementPoint = mapper.Map<ElectricityMeasurementPoint>(electricityMeasurementPointReq);
-            using (var transaction = _Db.Database.BeginTransaction())
+            using (var transaction = db.Database.BeginTransaction())
             {
-                await _Db.CurrentTransformers.AddAsync(electricityMeasurementPoint?.CurrentTransformer);
-                await _Db.VoltageTransformers.AddAsync(electricityMeasurementPoint?.VoltageTransformer);
-                await _Db.ElectricEnergyMeters.AddAsync(electricityMeasurementPoint?.ElectricEnergyMeter);
-                await _Db.ElectricityMeasurementPoints.AddAsync(electricityMeasurementPoint);
+                await db.CurrentTransformers.AddAsync(electricityMeasurementPoint?.CurrentTransformer);
+                await db.VoltageTransformers.AddAsync(electricityMeasurementPoint?.VoltageTransformer);
+                await db.ElectricEnergyMeters.AddAsync(electricityMeasurementPoint?.ElectricEnergyMeter);
+                await db.ElectricityMeasurementPoints.AddAsync(electricityMeasurementPoint);
 
-                _Db.SaveChanges();
+                db.SaveChanges();
 
                 await transaction.CommitAsync();
 

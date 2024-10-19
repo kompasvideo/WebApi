@@ -10,18 +10,12 @@ namespace TransNeftEnergo.Logic.Services
         : IObjectOfConsumptionService
     {
         public async Task<IEnumerable<ElectricEnergyMeterResp>> GetAllMetersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
-        {
-            return await objectOfConsumptionRepository.GetAllMetersToEndVerificationDate(objectOfConsumptionReq);
-        }
+            => await objectOfConsumptionRepository.GetAllMetersToEndVerificationDate(objectOfConsumptionReq);        
 
         public async Task<IEnumerable<VoltageTransformerResp>> GetAllVoltageTransformersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
-        {
-            return await objectOfConsumptionRepository.GetAllVoltageTransformersToEndVerificationDate(objectOfConsumptionReq);
-        }
+            => await objectOfConsumptionRepository.GetAllVoltageTransformersToEndVerificationDate(objectOfConsumptionReq);
+        
         public async Task<IEnumerable<CurrentTransformerResp>> GetAllCurrentTransformersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
-        {
-            return await objectOfConsumptionRepository.GetAllCurrentTransformersToEndVerificationDate(objectOfConsumptionReq);
-        }
-
+            => await objectOfConsumptionRepository.GetAllCurrentTransformersToEndVerificationDate(objectOfConsumptionReq);        
     }
 }

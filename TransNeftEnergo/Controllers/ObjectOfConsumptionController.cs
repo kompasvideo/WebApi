@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TransNeftEnergo.Application.Interfaces.Services;
-using TransNeftEnergo.Core.Entity;
 using TransNeftEnergo.Core.Requests;
 
 namespace TransNeftEnergo.WebAPI.Controllers

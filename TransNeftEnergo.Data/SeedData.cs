@@ -239,52 +239,6 @@ namespace TransNeftEnergo.Data
             });
             calculationDevices[4].ElectricityMeasurementPoints.Add(electricityMeasurementPoints[4]);
         }
-        //private static List<AccountingPeriod> AddAccountingPeriod(OrganizationDb context, List<CalculationDevice> calculationDevices, List<ElectricityMeasurementPoint> electricityMeasurementPoints)
-        //{
-        //List<AccountingPeriod> accountingPeriods = new List<AccountingPeriod>()
-        //    {
-        //        new AccountingPeriod
-        //        {
-        //            StartDate = new DateTime(2024,1,1),
-        //            EndDate = new DateTime(2024,2,1),
-        //            CalculationDevice = calculationDevices[0],
-        //            ElectricityMeasurementPoint = electricityMeasurementPoints[0]
-        //        },
-        //        new AccountingPeriod
-        //        {
-        //            StartDate = new DateTime(2024,1,1),
-        //            EndDate = new DateTime(2024,2,1),
-        //            CalculationDevice = calculationDevices[1],
-        //            ElectricityMeasurementPoint = electricityMeasurementPoints[1]
-        //        },
-        //        new AccountingPeriod
-        //        {
-        //            StartDate = new DateTime(2024,1,1),
-        //            EndDate = new DateTime(2024,2,1),
-        //            CalculationDevice = calculationDevices[2],
-        //            ElectricityMeasurementPoint = electricityMeasurementPoints[2]
-        //        },
-        //        new AccountingPeriod
-        //        {
-        //            StartDate = new DateTime(2024,1,1),
-        //            EndDate = new DateTime(2024,2,1),
-        //            CalculationDevice = calculationDevices[3],
-        //            ElectricityMeasurementPoint = electricityMeasurementPoints[3]
-        //        },
-        //        new AccountingPeriod
-        //        {
-        //            StartDate = new DateTime(2024,1,1),
-        //            EndDate = new DateTime(2024,2,1),
-        //            CalculationDevice = calculationDevices[4],
-        //            ElectricityMeasurementPoint = electricityMeasurementPoints[4]
-        //        },
-        //    };
-        //if (!context.AccountingPeriods.Any())
-        //{
-        //    context.AccountingPeriods.AddRange(accountingPeriods);
-        //}
-        //return accountingPeriods;
-        //}
 
         private static List<ElectricityMeasurementPoint> AddElectricityMeasurementPoint(OrganizationDb context, List<ObjectOfConsumption> objectOfConsumptions)
         {

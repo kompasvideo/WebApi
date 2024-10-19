@@ -8,7 +8,7 @@ using TransNeftEnergo.Data.Entity;
 namespace TransNeftEnergo.Data.Repositories
 {
     public class ObjectOfConsumptionRepository(
-        OrganizationDb _Db,
+        OrganizationDb db,
         IMapper mapper)
         : IObjectOfConsumptionRepository
     {
@@ -16,7 +16,7 @@ namespace TransNeftEnergo.Data.Repositories
         // с закончившимся сроком поверке.
         public async Task<IEnumerable<ElectricEnergyMeterResp>> GetAllMetersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
             => mapper.Map<ElectricEnergyMeter[], IEnumerable<ElectricEnergyMeterResp>>(
-                (await _Db.ElectricityMeasurementPoints.Include(i => i.ObjectOfConsumption).Include(i => i.ElectricEnergyMeter)
+                (await db.ElectricityMeasurementPoints.Include(i => i.ObjectOfConsumption).Include(i => i.ElectricEnergyMeter)
                 .Where(i => i.ObjectOfConsumption.Name == objectOfConsumptionReq.Name)
                 .ToListAsync())
                 .Select(empd => empd.ElectricEnergyMeter)
@@ -27,7 +27,7 @@ namespace TransNeftEnergo.Data.Repositories
         // трансформаторы напряжения с закончившимся сроком поверке.
         public async Task<IEnumerable<VoltageTransformerResp>> GetAllVoltageTransformersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
             => mapper.Map<VoltageTransformer[], IEnumerable<VoltageTransformerResp>>(
-                (await _Db.ElectricityMeasurementPoints.Include(i => i.ObjectOfConsumption).Include(i => i.VoltageTransformer)
+                (await db.ElectricityMeasurementPoints.Include(i => i.ObjectOfConsumption).Include(i => i.VoltageTransformer)
                 .Where(i => i.ObjectOfConsumption.Name == objectOfConsumptionReq.Name)
                 .ToListAsync())
                 .Select(v => v.VoltageTransformer)
@@ -38,7 +38,7 @@ namespace TransNeftEnergo.Data.Repositories
         // трансформаторы тока с закончившимся сроком поверке.
         public async Task<IEnumerable<CurrentTransformerResp>> GetAllCurrentTransformersToEndVerificationDate(ObjectOfConsumptionReq objectOfConsumptionReq)
             => mapper.Map<CurrentTransformer[], IEnumerable<CurrentTransformerResp>>(
-                (await _Db.ElectricityMeasurementPoints.Include(i => i.ObjectOfConsumption).Include(i => i.CurrentTransformer)
+                (await db.ElectricityMeasurementPoints.Include(i => i.ObjectOfConsumption).Include(i => i.CurrentTransformer)
                 .Where(i => i.ObjectOfConsumption.Name == objectOfConsumptionReq.Name)
                 .ToListAsync())
                 .Select(v => v.CurrentTransformer)
