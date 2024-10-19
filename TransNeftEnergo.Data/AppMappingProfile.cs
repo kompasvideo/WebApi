@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TransNeftEnergo.Core.Entity;
 using TransNeftEnergo.Core.Requests;
+using TransNeftEnergo.Core.Responses;
 using TransNeftEnergo.Data.Entity;
 
 namespace TransNeftEnergo.Data
@@ -13,25 +14,18 @@ namespace TransNeftEnergo.Data
             CreateMap<SubsidiaryOrganization, SubsidiaryOrganizationDto>().ReverseMap();
             CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointDto>();
             CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointDto>().ReverseMap();
-            //CreateMap<IEnumerable<CalculationDevice>, IEnumerable<CalculationDeviceDto>>();
-            //CreateMap<IEnumerable<CalculationDevice>, IEnumerable<CalculationDeviceDto>>().ReverseMap();
-            CreateMap<IEnumerable<ElectricEnergyMeter>, IEnumerable<ElectricEnergyMeterDto>>();
-            CreateMap<IEnumerable<ElectricEnergyMeter>, IEnumerable<ElectricEnergyMeterDto>>().ReverseMap();
-            CreateMap<IEnumerable<VoltageTransformer>, IEnumerable<VoltageTransformerDto>>();
-            CreateMap<IEnumerable<VoltageTransformer>, IEnumerable<VoltageTransformerDto>>().ReverseMap();
-            CreateMap<IEnumerable<CurrentTransformer>, IEnumerable<CurrentTransformerDto>>();
-            CreateMap<IEnumerable<CurrentTransformer>, IEnumerable<CurrentTransformerDto>>().ReverseMap();
 
-            CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointReq>();
-            CreateMap<ElectricityMeasurementPoint, ElectricityMeasurementPointReq>().ReverseMap();
+            CreateMap<ElectricityMeasurementPointReq, ElectricityMeasurementPoint>();
             CreateMap<ElectricEnergyMeter, ElectricEnergyMeterReq>();
             CreateMap<ElectricEnergyMeter, ElectricEnergyMeterReq>().ReverseMap();
-            CreateMap<VoltageTransformer, VoltageTransformerReq>();
-            CreateMap<VoltageTransformer, VoltageTransformerReq>().ReverseMap();
-            CreateMap<CurrentTransformer, CurrentTransformerReq>();
-            CreateMap<CurrentTransformer, CurrentTransformerReq>().ReverseMap();
+            CreateMap<VoltageTransformerReq, VoltageTransformer>();
+            CreateMap<CurrentTransformerReq, CurrentTransformer>();
             CreateMap<CalculationDevice, CalculationDeviceDto>();
             CreateMap<CalculationDevice, CalculationDeviceDto>().ReverseMap();
+            CreateMap<ElectricEnergyMeter, ElectricEnergyMeterResp>();
+            CreateMap<CalculationDevice, CalculationDeviceResp>();
+            CreateMap<VoltageTransformer, VoltageTransformerResp>();
+            CreateMap<CurrentTransformer, CurrentTransformerResp>();
         }
     }
 }

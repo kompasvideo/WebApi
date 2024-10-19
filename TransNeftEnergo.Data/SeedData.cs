@@ -68,6 +68,14 @@ namespace TransNeftEnergo.Data
                         KTN ="50/5",
                         ElectricityMeasurementPoint = electricityMeasurementPoints[4]
                     },
+                    new VoltageTransformer
+                    {
+                        Number = "217",
+                        Type = Enums.VoltageTransformerType.Type1,
+                        VerificationDate = new DateTime(2023,12,01),
+                        KTN ="100/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
                 };
             if (!context.VoltageTransformers.Any())
             {
@@ -120,6 +128,14 @@ namespace TransNeftEnergo.Data
                         KTT = "100/5",
                         ElectricityMeasurementPoint = electricityMeasurementPoints[4]
                     },
+                     new CurrentTransformer
+                    {
+                        Number = "117",
+                        Type = Enums.CurrentTransformerType.Type1,
+                        VerificationDate = new DateTime(2023,12,01),
+                        KTT = "200/5",
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
+                    },
                 };
             if (!context.CurrentTransformers.Any())
             {
@@ -166,6 +182,13 @@ namespace TransNeftEnergo.Data
                         Type = Enums.MeterType.Type2,
                         VerificationDate = new DateTime(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[4]
+                    },
+                    new ElectricEnergyMeter
+                    {
+                        Name = "Счётчик электрической энергии 6",
+                        Type = Enums.MeterType.Type1,
+                        VerificationDate = new DateTime(2023,12,1),
+                        ElectricityMeasurementPoint = electricityMeasurementPoints[0]
                     },
                 };
             if (!context.ElectricEnergyMeters.Any())

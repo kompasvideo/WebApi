@@ -1,9 +1,9 @@
-﻿using TransNeftEnergo.Core.Entity;
+﻿using TransNeftEnergo.Core.Responses;
 
 namespace TransNeftEnergo.Application.Interfaces.Services
 {
     public interface ICalculationDeviceService
     {
-        Task<IEnumerable<CalculationDeviceDto>> GetAllForYear(int year);
+        Task<IEnumerable<CalculationDeviceResp>> GetAllForYear(int year);
     }
 }

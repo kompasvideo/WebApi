@@ -1,6 +1,6 @@
 ﻿using TransNeftEnergo.Application.Interfaces.Repositories;
 using TransNeftEnergo.Application.Interfaces.Services;
-using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Core.Responses;
 
 namespace TransNeftEnergo.Logic.Services
 {
@@ -8,7 +8,7 @@ namespace TransNeftEnergo.Logic.Services
         ICalculationDeviceRepository calculationDeviceRepository)
         : ICalculationDeviceService
     {
-        public async Task<IEnumerable<CalculationDeviceDto>> GetAllForYear(int year)
+        public async Task<IEnumerable<CalculationDeviceResp>> GetAllForYear(int year)
         {
             return await calculationDeviceRepository.GetAllForYear(year);
         }

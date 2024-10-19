@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TransNeftEnergo.Application.Interfaces.Repositories;
-using TransNeftEnergo.Core.Entity;
+using TransNeftEnergo.Core.Responses;
 using TransNeftEnergo.Data.Entity;
 
 namespace TransNeftEnergo.Data.Repositories
@@ -12,8 +12,8 @@ namespace TransNeftEnergo.Data.Repositories
         : ICalculationDeviceRepository
     {
         // 2.	Выбрать все расчетные приборы учета в 2018 году.
-        public async Task<IEnumerable<CalculationDeviceDto>> GetAllForYear(int year)
-        => mapper.Map<CalculationDevice[], IEnumerable<CalculationDeviceDto>>(await _Db.CalculationDevices.Where(
+        public async Task<IEnumerable<CalculationDeviceResp>> GetAllForYear(int year)
+        => mapper.Map<CalculationDevice[], IEnumerable<CalculationDeviceResp>>(await _Db.CalculationDevices.Where(
             t => t.AccountingPeriods.Any(
             i => i.StartDate.Value.Year <= year && i.EndDate.Value.Year >= year)).ToArrayAsync());
     }
