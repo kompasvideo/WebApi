@@ -187,7 +187,7 @@ namespace TransNeftEnergo.Data
                     {
                         Name = "Счётчик электрической энергии 6",
                         Type = Enums.MeterType.Type1,
-                        VerificationDate = new DateTime(2023,12,1),
+                        VerificationDate = new DateTime(2025,12,1),
                         ElectricityMeasurementPoint = electricityMeasurementPoints[0]
                     },
                 };

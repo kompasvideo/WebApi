@@ -1,8 +1,8 @@
-using System.Text.Json.Serialization;
 using System.Text.Json;
-using System;
+using System.Text.Json.Serialization;
 using TransNeftEnergo.Data;
 using TransNeftEnergo.Logic;
+using TransNeftEnergo.WebAPI.Middleware;
 using SeedData = TransNeftEnergo.WebAPI.SeedData;
 
 
@@ -17,16 +17,16 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.WriteIndented = true;
-        options.JsonSerializerOptions.Converters.Add( new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
 
-    }); 
+    });
 builder.Services.AddSwaggerGen();
 builder.Services.AddData(builder.Configuration);
 builder.Services.AddLogic();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
-
+app.UseMiddleware<ExceptionsMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

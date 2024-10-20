@@ -13,7 +13,7 @@ namespace TransNeftEnergo.WebAPI.Controllers
         /// 3.	По указанному объекту потребления выбрать все счетчики 
         /// с закончившимся сроком поверке.
         /// </summary>
-        /// <param name="electricityMeasurementPointDto"></param>
+        /// <param name="objectOfConsumptionReq"></param>
         /// <returns></returns>
         [HttpPost("/api/v1/ObjectOfConsumption/AllMetersToEndVerificationDate")]    // ПС 110/10 Весна
         public async Task<ActionResult> GetAllMetersToEndVerificationDate([FromBody] ObjectOfConsumptionReq objectOfConsumptionReq)
